@@ -3,7 +3,7 @@ using System;
 public class Registierung : User
 {
     public string registerTiem { get; private set; }
-    public string birthday {get;}
+    public string birthday {get; set; }
     public Registierung(string Name, string PassWord, string Birthday) : base(Name, PassWord)
     {
         birthday = Birthday;

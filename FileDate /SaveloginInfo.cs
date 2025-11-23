@@ -1,7 +1,7 @@
 using System;
 using System.Text.Json;
 
-public class SaveloginInfo: DataMethods
+public class SaveloginInfo
 {
     public string folder = "Data";
     public string userAktion = "userLogin.json";
@@ -15,10 +15,10 @@ public class SaveloginInfo: DataMethods
     {
         return true;
     }
-    public void add_data(User user)
-    {
+    // public void add_data(User user)
+    // {
         
-    }
+    // }
     public List<User> Call_data()
     {
         string path = System.IO.Path.Combine(folder, userAktion);
