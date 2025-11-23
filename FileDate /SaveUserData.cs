@@ -1,53 +1,59 @@
 using System;
+using System.Diagnostics;
 using System.Text.Json;
 
 public class SaveUserData : DataMethods
 {
-    public string folder = "Data";
-    public string userDate = "userData.json";
-    public void create_file()
-    {
-        string path = System.IO.Path.Combine(folder, userDate);
-        File.Create(path);
-        Console.WriteLine($"File {userDate} it is created ");
-    }
+    static string folder = "Data";
+    static string userDate = "userData.json";
+    static string path = System.IO.Path.Combine(folder, userDate);
+
     public bool check_exists_file()
     {
-        string path = System.IO.Path.Combine(folder, userDate);
         return System.IO.File.Exists(path);
     }
     
-    public void add_data(User user)
+    public void add_data(Registierung registierung)
     {
-        string path = System.IO.Path.Combine(folder, userDate);
-        // if (check_exists_file())
-        // {
-        //     using (var writer = new StreamWriter(path, append:true))
-        //     {
-        //         writer.WriteLine($"{d1},{d2},{d3}");
-        //     }
-        //     return "File written";
-        // }
-        // else
-        // {
-    
-        //     File.WriteAllText(path, $"{d1},{d2},{d3}");
-            
-            // return "Create File \nFile written";
-        // }
+        if (!check_exists_file())
+        {
+            // Console.WriteLine("file nut exsist");
+            List<Registierung> regelist = new List<Registierung>
+            {
+                registierung
+            };
+            string jsonone = JsonSerializer.Serialize(regelist);
+            File.WriteAllText(path, jsonone);
+            Console.WriteLine("create file and save the data in file");
+        }
+        else
+        {    
+            var file = Call_data();
+            // Console.WriteLine("read file ");
+            // read_file();
+            file.Add(registierung);
+            // Console.WriteLine();
+            string json = JsonSerializer.Serialize(file);
+
+            // Console.WriteLine(json);
+            // Console.WriteLine("string json = JsonSerializer.Serialize(file);");
+            File.WriteAllText(path, json);
+            // Console.WriteLine("File.WriteAllText(product.json, json);");
+            Console.WriteLine("User Data it is saved in file ");
+        }
+        
     }
-    public List<User> Call_data()
+    public List<Registierung> Call_data()
     {
-        string path = System.IO.Path.Combine(folder, userDate);
         string json = File.ReadAllText(path);
-        return JsonSerializer.Deserialize<List<User>>(json) ?? new List<User>();
+        return JsonSerializer.Deserialize<List<Registierung>>(json) ?? new List<Registierung>();
+        
     }
     public void read_file()
     {
+        Console.WriteLine(string.Join(",",Call_data().ConvertAll(p => $"Name : {p.name} , Password :{p.password} , Birthday : {p.birthday}\n")));
+    }
 
-    }
-    public int ID()
-    {
-        return 0;
-    }
+
+
 }
