@@ -14,26 +14,77 @@ public class Program
         bool user_situation = false;
         bool regester_situation = false;
         bool run_situation = true;
-        // while (run_situation){
-        //     Console.WriteLine("chois number your situation please\nIf you ready press Ok/y ");
-        //     string answer_1 = Console.ReadLine();
-        //     if (String.IsNullOrEmpty(answer_1) || String.IsNullOrWhiteSpace(answer_1)){
-        //         Console.WriteLine("Please don't press Enter with no Answer");
-        //         break;
-        //     }else if (answer_1 == "ok" || answer_1 == "y"  ){
-                
-        //     }
+        bool regiLog = true;
+        SaveUserData saveUserData = new SaveUserData();
+        SaveloginInfo saveloginInfo = new SaveloginInfo();
+        
+        while (run_situation){
+            Console.WriteLine("chois number your situation please\nIf you ready press Ok/y ");
+            string answer_1 = Console.ReadLine();
+            if (String.IsNullOrEmpty(answer_1) || String.IsNullOrWhiteSpace(answer_1)){
+                Console.WriteLine("Please don't press Enter with no Answer");
+                break;
+            }else if (answer_1 == "ok" || answer_1 == "y"  ){
+                string user;
+                string pw;
+                while (regiLog)
+                {
+                    Console.WriteLine("Register/Login");
+                    string choisUser = Console.ReadLine()?.ToLower().Trim();
+                    if (choisUser == "register")
+                    {
+                        Console.WriteLine("UserNameL");
+                        user = Console.ReadLine()?.ToLower().Trim();
+                        Console.WriteLine("Password");
+                        pw = Console.ReadLine()?.ToLower().Trim();
+                        Console.WriteLine("Birthday");
+                        string birthday = Console.ReadLine()!;
+                        Registierung registierung = new Registierung(user, pw, birthday);
+                        saveUserData.add_data(registierung);
+                        Login login = new Login (user, pw);
+                        saveloginInfo.add_data(login);
+                        regiLog = false;
+                    }else if (choisUser == "login")
+                    {
+                        Console.WriteLine("UserNameL");
+                        user = Console.ReadLine()?.ToLower().Trim();
+                        Console.WriteLine("Password");
+                        pw = Console.ReadLine()?.ToLower().Trim();
+                        Login login = new Login (user, pw);
+                        saveloginInfo.add_data(login);
+                        regiLog = false;
+                    }
+                    else
+                    {
+                        Console.Write("try again please /n but this tie give the wright Anser :");
+                    }
+                    
+                }
+            }
+            else
+            {
+                Console.WriteLine("are you sur you want go out ?? y/n ");
+                string input = Console.ReadLine()?.ToLower().Trim();
+                if (input == "y")
+                {
+                    Console.WriteLine("Thank you ");
+                    run_situation = false;
+                }
+            }
 
-        // }
-        Console.WriteLine("UserNameL");
-        string user = Console.ReadLine()!;
-        Console.WriteLine("Password");
-        string pw = Console.ReadLine()!;
+        }
+
+
+
+        // Console.WriteLine("UserNameL");
+        // string user = Console.ReadLine()?.ToLower().Trim();
+        // Console.WriteLine("Password");
+        // string pw = Console.ReadLine()?.ToLower().Trim();
         // Console.WriteLine("Birthday");
         // string Birthday = Console.ReadLine()!;
         // string date = DateTime.Now.ToString("MM/dd/yyyy");
         // Registierung registierung = new Registierung(user, pw, Birthday);
-            Login login = new Login(user, pw);
+            // Login login = new Login(user, pw);
             
         // registierung.regterSave();
         Console.WriteLine("-----------------");
@@ -54,11 +105,41 @@ public class Program
         // Console.WriteLine(saveUserData.check_exists_file());
         // saveUserData.read_file();
         // saveUserData.read_file();
-        SaveloginInfo saveloginInfo = new SaveloginInfo();
-        saveloginInfo.check_exists_file();
-        saveloginInfo.add_data(login);
-        saveloginInfo.check_exists_file();
-        saveloginInfo.read_file();
+        // SaveloginInfo saveloginInfo = new SaveloginInfo();
+        // saveloginInfo.check_exists_file();
+        // saveloginInfo.add_data(login);
+        // saveloginInfo.check_exists_file();
+        // saveloginInfo.read_file();
+        // string folder ="Data";
+        // if (Directory.Exists(folder))
+        // {
+        //     Console.WriteLine($"Dir : {folder} it is exists");
+        // }
+
+        //  if (Directory.Exists($"{folder}/{user}"))
+        // {
+        //     Console.WriteLine($"Dir : {user} it is exists 1");
+        //     if (File.Exists($"{folder}/{user}/{user}.json"))
+        //     {
+        //         Console.WriteLine($"File : {user}.json it is exists 2");
+        //     }
+        //     else
+        //     {
+        //         File.Create($"{folder}/{user}/{user}.json");
+        //         Console.WriteLine($"File : {user}.json it is created now 3");
+        //     }
+        // }
+        // else
+        // {
+        //     Console.WriteLine($"Dir : Amer it is nut exists");
+        //     string newOne = folder+$"/{user}.json";
+        //     Directory.CreateDirectory($"{folder}/{user}");
+        //     Console.WriteLine($"Dir : {folder}/{user} it is created Now (((()))) 4");
+        //     Console.WriteLine($"file : {user} it is exists 5");
+        //     File.Create($"{folder}/{user}/{user}.json");
+        //     Console.WriteLine($"File : {user}.json it is created now 6");
+        // }
+
 
 
 
