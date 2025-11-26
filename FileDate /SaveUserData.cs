@@ -24,7 +24,7 @@ public class SaveUserData : DataMethods
             };
             string jsonone = JsonSerializer.Serialize(regelist);
             File.WriteAllText(path, jsonone);
-            Console.WriteLine("create file and save the data in file");
+            Console.WriteLine("create file and save the Register data in file");
         }
         else
         {    
@@ -39,7 +39,7 @@ public class SaveUserData : DataMethods
             // Console.WriteLine("string json = JsonSerializer.Serialize(file);");
             File.WriteAllText(path, json);
             // Console.WriteLine("File.WriteAllText(product.json, json);");
-            Console.WriteLine("User Data it is saved in file ");
+            Console.WriteLine("Register Data it is saved in file ");
         }
         
     }
@@ -51,7 +51,7 @@ public class SaveUserData : DataMethods
     }
     public void read_file()
     {
-        Console.WriteLine(string.Join(",",Call_data().ConvertAll(p => $"Name : {p.name} , Password :{p.password} , Birthday : {p.birthday}\n")));
+        Console.WriteLine(string.Join(",",Call_data().ConvertAll(p => $"ID: {p.id}, Name : {p.name} , Password :{p.password} , Birthday : {p.birthday}\n")));
     }
 
 
