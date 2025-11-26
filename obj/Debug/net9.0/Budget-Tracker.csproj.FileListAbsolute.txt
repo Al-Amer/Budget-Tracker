@@ -1,0 +1,15 @@
+/Users/ameralmunajjed/WBS/C_Shapr/Projects/Budget-Tracker/obj/Debug/net9.0/Budget-Tracker.GeneratedMSBuildEditorConfig.editorconfig
+/Users/ameralmunajjed/WBS/C_Shapr/Projects/Budget-Tracker/obj/Debug/net9.0/Budget-Tracker.AssemblyInfoInputs.cache
+/Users/ameralmunajjed/WBS/C_Shapr/Projects/Budget-Tracker/obj/Debug/net9.0/Budget-Tracker.AssemblyInfo.cs
+/Users/ameralmunajjed/WBS/C_Shapr/Projects/Budget-Tracker/obj/Debug/net9.0/Budget-Tracker.csproj.CoreCompileInputs.cache
+/Users/ameralmunajjed/WBS/C_Shapr/Projects/Budget-Tracker/obj/Debug/net9.0/Budget-Tracker.sourcelink.json
+/Users/ameralmunajjed/WBS/C_Shapr/Projects/Budget-Tracker/bin/Debug/net9.0/Budget-Tracker
+/Users/ameralmunajjed/WBS/C_Shapr/Projects/Budget-Tracker/bin/Debug/net9.0/Budget-Tracker.deps.json
+/Users/ameralmunajjed/WBS/C_Shapr/Projects/Budget-Tracker/bin/Debug/net9.0/Budget-Tracker.runtimeconfig.json
+/Users/ameralmunajjed/WBS/C_Shapr/Projects/Budget-Tracker/bin/Debug/net9.0/Budget-Tracker.dll
+/Users/ameralmunajjed/WBS/C_Shapr/Projects/Budget-Tracker/bin/Debug/net9.0/Budget-Tracker.pdb
+/Users/ameralmunajjed/WBS/C_Shapr/Projects/Budget-Tracker/obj/Debug/net9.0/Budget-Tracker.dll
+/Users/ameralmunajjed/WBS/C_Shapr/Projects/Budget-Tracker/obj/Debug/net9.0/refint/Budget-Tracker.dll
+/Users/ameralmunajjed/WBS/C_Shapr/Projects/Budget-Tracker/obj/Debug/net9.0/Budget-Tracker.pdb
+/Users/ameralmunajjed/WBS/C_Shapr/Projects/Budget-Tracker/obj/Debug/net9.0/Budget-Tracker.genruntimeconfig.cache
+/Users/ameralmunajjed/WBS/C_Shapr/Projects/Budget-Tracker/obj/Debug/net9.0/ref/Budget-Tracker.dll
