@@ -1,6 +1,10 @@
 ﻿using System;
 using System.Data.SqlTypes;
 using System.Runtime.CompilerServices;
+using BudgetLogger.Models;
+using BudgetLogger.Core;
+using BudgetLogger.Models;
+using System.Globalization;
 
 
 public class Program
@@ -15,6 +19,9 @@ public class Program
         bool regester_situation = false;
         bool run_situation = true;
         bool regiLog = true;
+        string user = "";
+        string pw = "";
+            // Transaction type;
         SaveUserData saveUserData = new SaveUserData();
         SaveloginInfo saveloginInfo = new SaveloginInfo();
         
@@ -25,8 +32,8 @@ public class Program
                 Console.WriteLine("Please don't press Enter with no Answer");
                 break;
             }else if (answer_1 == "ok" || answer_1 == "y"  ){
-                string user;
-                string pw;
+                // string user;
+                // string pw;
                 while (regiLog)
                 {
                     Console.WriteLine("Register/Login");
@@ -60,6 +67,49 @@ public class Program
                     }
                     
                 }
+                // End of while (regiLog)
+                //
+                Console.WriteLine($"Logged in as: {user} ");
+                //
+                // --- 2. Get Transaction Type ---
+                TransactionType type;
+                while (true)
+                {
+                    Console.Write("Enter Type (income/expense): ");
+                    var typeInput = Console.ReadLine()?.Trim().ToLower();
+                    if (typeInput == "income" && Enum.TryParse("Income", true, out type)) break;
+                    if (typeInput == "expense" && Enum.TryParse("Expense", true, out type)) break;
+                    Console.WriteLine("[ERROR] Invalid type. Please enter 'income' or 'expense'.");
+                }
+                
+                // --- 3. Get Description (for the 'out' part of your example) ---
+                string description;
+                while (true)
+                {
+                    Console.Write("Enter Description: ");
+                    description = Console.ReadLine()?.Trim() ?? string.Empty;
+                    if (!string.IsNullOrWhiteSpace(description)) break;
+                    Console.WriteLine("[ERROR] Description cannot be empty.");
+                }
+
+                // --- 4. Get Amount ---
+                decimal amount;
+                while (true)
+                {
+                    Console.Write("Enter Amount: ");
+                    var amountInput = Console.ReadLine();
+                    // Use TryParse for robustness (error handling)
+                    if (decimal.TryParse(amountInput, NumberStyles.Currency, CultureInfo.CurrentCulture, out amount) && amount > 0)
+                    {
+                        break;
+                    }
+                    Console.WriteLine("[ERROR] Invalid amount. Must be a positive number.");
+                }
+
+                // --- 5. Generate Log ---
+                LogGenerator.WriteInfoLog(user, type, amount, description);
+                //
+
             }
             else
             {
@@ -69,10 +119,12 @@ public class Program
                 {
                     Console.WriteLine("Thank you ");
                     run_situation = false;
+                    
                 }
             }
 
         }
+        // End of  while (run_situation)
 
 
 
@@ -145,7 +197,6 @@ public class Program
 
 
 
-     
 
     }
 }
