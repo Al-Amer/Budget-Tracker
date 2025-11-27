@@ -21,11 +21,12 @@ public class Program
         bool regiLog = true;
         string user = "";
         string pw = "";
+        // string logo_data = "";
             // Transaction type;
         SaveUserData saveUserData = new SaveUserData();
         SaveloginInfo saveloginInfo = new SaveloginInfo();
-        
-        while (run_situation){
+        Logo logo_json = new Logo();
+        while (run_situation){ 
             Console.WriteLine("chois number your situation please\nIf you ready press Ok/y ");
             string answer_1 = Console.ReadLine();
             if (String.IsNullOrEmpty(answer_1) || String.IsNullOrWhiteSpace(answer_1)){
@@ -106,9 +107,13 @@ public class Program
                     Console.WriteLine("[ERROR] Invalid amount. Must be a positive number.");
                 }
 
-                // --- 5. Generate Log ---
+                // --- 5.1  Generate Log File info.log---
                 LogGenerator.WriteInfoLog(user, type, amount, description);
-                //
+                // --- 5.2  Generate Log File date.json---
+               
+                LogoTypes logoTypes = new LogoTypes(user, type.ToString() , amount ,description );
+                logo_json.add_data(logoTypes);
+
 
             }
             else
