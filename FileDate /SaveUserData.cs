@@ -53,7 +53,11 @@ public class SaveUserData : DataMethods
     {
         Console.WriteLine(string.Join(",",Call_data().ConvertAll(p => $"ID: {p.id}, Name : {p.name} , Password :{p.password} , Birthday : {p.birthday}\n")));
     }
-
+     public void registerInfo()
+    {
+        List<Registierung>  users =Call_data();
+        Console.WriteLine(string.Join(",",Call_data().ConvertAll(p => $" Name : {p.name} , Login Time : {p.password} \n")));
+    }
 
 
 }

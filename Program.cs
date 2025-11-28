@@ -5,6 +5,7 @@ using BudgetLogger.Models;
 using BudgetLogger.Core;
 using BudgetLogger.Models;
 using System.Globalization;
+using System.Text.Json;
 
 
 public class Program
@@ -12,7 +13,6 @@ public class Program
     public static void Main()
     {
         string[] situation = ["Login","Registrieren", "Read data"];
-        // See https://aka.ms/new-console-template for more information
         Console.WriteLine("🛠️ Project Guidelines and Requirements");
         Console.WriteLine("wellcome");
         bool user_situation = false;
@@ -21,6 +21,7 @@ public class Program
         bool regiLog = true;
         string user = "";
         string pw = "";
+        string[] optionList = ["choice one option please ","1- see all the files", "2-see the result form one person ","3-see login tim for user", "4-see Register Name and Password","Enter the number of option please"];
         // string logo_data = "";
             // Transaction type;
         SaveUserData saveUserData = new SaveUserData();
@@ -72,7 +73,6 @@ public class Program
                 //
                 Console.WriteLine($"Logged in as: {user} ");
                 //
-                // --- 2. Get Transaction Type ---
                 TransactionType type;
                 while (true)
                 {
@@ -83,7 +83,6 @@ public class Program
                     Console.WriteLine("[ERROR] Invalid type. Please enter 'income' or 'expense'.");
                 }
                 
-                // --- 3. Get Description (for the 'out' part of your example) ---
                 string description;
                 while (true)
                 {
@@ -93,13 +92,11 @@ public class Program
                     Console.WriteLine("[ERROR] Description cannot be empty.");
                 }
 
-                // --- 4. Get Amount ---
                 decimal amount;
                 while (true)
                 {
                     Console.Write("Enter Amount: ");
                     var amountInput = Console.ReadLine();
-                    // Use TryParse for robustness (error handling)
                     if (decimal.TryParse(amountInput, NumberStyles.Currency, CultureInfo.CurrentCulture, out amount) && amount > 0)
                     {
                         break;
@@ -107,10 +104,7 @@ public class Program
                     Console.WriteLine("[ERROR] Invalid amount. Must be a positive number.");
                 }
 
-                // --- 5.1  Generate Log File info.log---
                 LogGenerator.WriteInfoLog(user, type, amount, description);
-                // --- 5.2  Generate Log File date.json---
-               
                 LogoTypes logoTypes = new LogoTypes(user, type.ToString() , amount ,description );
                 logo_json.add_data(logoTypes);
 
@@ -124,6 +118,78 @@ public class Program
                 {
                     Console.WriteLine("Thank you ");
                     run_situation = false;
+
+                }
+                else
+                {
+                    bool optionWhle = true;
+                    while (optionWhle)
+                    {
+                        int option_nummer=0;
+                        foreach(string s in optionList)
+                        {
+                            Console.WriteLine(s);
+                        }
+                        try
+                        {
+                            option_nummer = Int16.Parse(Console.ReadLine().Trim());
+                        }catch(Exception ex)
+                        {
+                            Console.WriteLine("enter number please");
+                        }
+                        if (option_nummer <= 0 || option_nummer > 4)
+                        {
+                            Console.WriteLine("please chois the wright number of List\nAnd don't try number out of list ;) ");
+                        }
+                        else 
+                        {
+                            switch (option_nummer)
+                            {
+                                case 1:
+                                    Console.WriteLine("------****------\n -- this is the user name ,password and the birthday");
+                                    saveUserData.read_file();
+                                    Console.WriteLine("-----------------");
+                                    Console.WriteLine("------****------\n -- this is the user name ,password ,Login time ");
+                                    saveloginInfo.read_file();
+                                    Console.WriteLine("-----------------");
+                                    Console.WriteLine("------****------\n -- this is the user name ,type ,amount and Description ");                        
+                                    logo_json.read_file();
+                                    Console.WriteLine("-----------------");
+                                    Console.WriteLine("-----------------");
+                                    break;
+                                case 2:
+                                    Console.WriteLine("What day you want ;");
+                                    string [] fileEntries = Directory.GetFiles("Data");
+                                    for (int i = 0; i< fileEntries.Length; i++)
+                                    {
+                                        Console.WriteLine($" {i} - {fileEntries[i]}");
+                                    }
+                                    Console.WriteLine("chois a numerb of file please");
+                                    int nu = Int16.Parse(Console.ReadLine().Trim());
+                                    string newPath = System.IO.Path.Combine("Data", fileEntries[nu]);
+                                    string json = File.ReadAllText(newPath);
+                                    List<LogoTypes> jsLi = JsonSerializer.Deserialize<List<LogoTypes>>(json) ?? new List<LogoTypes>();
+                                    Console.WriteLine(string.Join(",",jsLi.ConvertAll(p => $" User : {p.user} , Type :{p.type} , Amount : {p.amount} , Description : {p.description} \n")));
+                                    string name = Console.ReadLine()?.ToLower().Trim();
+                                    break;
+                                case 3:
+                                    Console.WriteLine("------****------\n -- this is the user name and login Time  ");
+                                    saveloginInfo.userName();
+                                    Console.WriteLine("-----------------");
+                                    break;
+                                case 4:
+                                    Console.WriteLine("------****------\n -- this is the Register name and Password  ");
+                                    saveUserData.registerInfo();
+                                    Console.WriteLine("-----------------");
+                                    break;
+                            }
+                        }
+                        Console.WriteLine("you want a exit : y/n");
+                        string na = Console.ReadLine()?.ToLower().Trim();
+                        if (na == "y") optionWhle = false;
+                        break;
+                    }
+                    
                     
                 }
             }
@@ -204,6 +270,8 @@ public class Program
 
 
     }
+
+
 }
 
 // Important 
