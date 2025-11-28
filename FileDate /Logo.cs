@@ -47,6 +47,12 @@ public class Logo{
         Console.WriteLine(string.Join(",",Call_data().ConvertAll(p => $" User : {p.user} , Type :{p.type} , Amount : {p.amount} , Description : {p.description} \n")));
 
     }
+    public void reuslt(string input_name)
+    {
+        List<LogoTypes> logs = Call_data();
+        var userAmount = logs.Where(p => p.user == input_name );
+    }
+
     
 
 
